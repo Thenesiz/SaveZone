@@ -1,0 +1,8 @@
+{
+  "appId": "com.thenesiz.savezone",
+  "appName": "SaveZone",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}
