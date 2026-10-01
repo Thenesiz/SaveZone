@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f2">
+  <meta name="description" content="A clear, calm place to track spending and build better saving habits.">
+  <title>SaveZone | Money, in focus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#dashboard" aria-label="SaveZone home"><span class="brand-mark" aria-hidden="true"><i></i></span><span class="brand-name">save<span>zone</span></span></a>
+      <div class="sidebar-caption">WORKSPACE</div>
+      <nav class="main-nav">
+        <button class="nav-link is-active" type="button" data-view="dashboard" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg><span>Overview</span></button>
+        <button class="nav-link" type="button" data-view="expenses"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3.75h14a1 1 0 0 1 1 1v15.5a.75.75 0 0 1-1.2.6L12 16.1l-6.8 4.75a.75.75 0 0 1-1.2-.6V4.75a1 1 0 0 1 1-1Z"/><path d="M8 8h8M8 11.5h8"/></svg><span>Expenses</span></button>
+        <button class="nav-link" type="button" data-view="savings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v17M17.5 7.5c-.5-2-2.25-3-5.25-3-3.1 0-5 1.4-5 3.5 0 5.4 10 1.6 10 6.8 0 2.4-2 3.8-5.5 3.8-3.15 0-5.15-1.2-5.75-3.5"/></svg><span>Savings</span></button>
+      </nav>
+      <div class="sidebar-bottom"><div class="sidebar-note"><span class="note-spark" aria-hidden="true">✳</span><p>Small steps add up.<br><strong>Keep going.</strong></p></div><div class="profile-row"><span class="avatar" aria-hidden="true">S</span><span class="profile-copy"><strong>My wallet</strong><small>Personal account</small></span><span class="profile-menu" aria-hidden="true">···</span></div></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <a class="mobile-brand brand" href="#dashboard" aria-label="SaveZone home"><span class="brand-mark" aria-hidden="true"><i></i></span><span class="brand-name">save<span>zone</span></span></a>
+        <div class="breadcrumb"><span>Workspace</span><span class="crumb-divider">/</span><strong id="breadcrumb-current">Overview</strong></div>
+        <div class="topbar-actions">
+          <label class="search-box" aria-label="Search expenses"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.2 4.2"/></svg><input id="global-search" type="search" placeholder="Search expenses" autocomplete="off"><kbd>/</kbd></label>
+          <button class="icon-button notification-button" type="button" aria-label="Notifications"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"/></svg><span></span></button>
+          <button class="button button-primary top-add-button" type="button" data-open-dialog="expense-dialog"><span aria-hidden="true">+</span> Add expense</button>
+        </div>
+      </header>
+
+      <section class="view" id="view-dashboard" aria-labelledby="page-title">
+        <div class="page-heading"><div><div class="eyebrow" id="today-label">YOUR MONEY, IN FOCUS</div><h1 id="page-title">Good morning, <span>you.</span></h1><p class="page-subtitle">Here’s the shape of your spending this month.</p></div><button class="button button-outline period-button" type="button" aria-label="Current month"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 9.5h17"/></svg><span id="month-label">This month</span><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></button></div>
+        <div class="summary-grid">
+          <article class="summary-card summary-card-dark"><div class="summary-top"><span>Spent this month</span><span class="summary-icon" aria-hidden="true">↗</span></div><strong class="summary-value" id="month-spend">₱0.00</strong><div class="summary-foot"><span class="status-dot"></span><span id="expense-count">0 expenses</span><span class="summary-period">this month</span></div><div class="summary-watermark" aria-hidden="true">₱</div></article>
+          <article class="summary-card"><div class="summary-top"><span>Left to spend</span><span class="summary-icon summary-icon-green" aria-hidden="true">↘</span></div><strong class="summary-value" id="remaining-amount">₱0.00</strong><div class="summary-foot"><span id="budget-caption">of your monthly allowance</span></div><div class="mini-progress"><span id="budget-progress"></span></div></article>
+          <article class="summary-card"><div class="summary-top"><span>Daily average</span><span class="summary-icon summary-icon-yellow" aria-hidden="true">◷</span></div><strong class="summary-value" id="daily-average">₱0.00</strong><div class="summary-foot"><span>based on days elapsed this month</span></div></article>
+        </div>
+        <div class="dashboard-grid">
+          <section class="panel spending-panel" aria-labelledby="spending-title"><div class="panel-heading"><div><h2 id="spending-title">Spending activity</h2><p>Your spending over the last 7 days</p></div><span class="chart-legend"><i></i> Expenses</span></div><div class="chart-total"><strong id="week-spend">₱0.00</strong><span class="chart-total-label">this week</span></div><div class="bar-chart" id="weekly-chart" role="img" aria-label="Spending by day over the last seven days"></div></section>
+          <section class="panel category-panel" aria-labelledby="category-title"><div class="panel-heading"><div><h2 id="category-title">Where it goes</h2><p>Top categories this month</p></div><button class="text-button" type="button" data-view-link="expenses">See all <span aria-hidden="true">→</span></button></div><div class="category-list" id="category-list"></div></section>
+        </div>
+        <section class="panel transactions-panel" aria-labelledby="recent-title"><div class="panel-heading transaction-heading"><div><h2 id="recent-title">Recent expenses</h2><p>A little look at where your money went</p></div><button class="text-button" type="button" data-view-link="expenses">All expenses <span aria-hidden="true">→</span></button></div><div class="table-wrap"><table class="transaction-table"><thead><tr><th scope="col">DESCRIPTION</th><th scope="col">CATEGORY</th><th scope="col">DATE</th><th scope="col" class="amount-column">AMOUNT</th></tr></thead><tbody id="recent-transactions"></tbody></table></div><div class="empty-state hidden" id="recent-empty">No expenses found. Try a different search.</div></section>
+        <footer class="page-footer"><span>Take it one day at a time.</span><span>Saved in this browser only.</span></footer>
+      </section>
+
+      <section class="view" id="view-expenses" aria-labelledby="expenses-title" hidden>
+        <div class="page-heading"><div><div class="eyebrow">THE DETAILS</div><h1 id="expenses-title">Your expenses.</h1><p class="page-subtitle">Every little thing, all in one place.</p></div><button class="button button-primary" type="button" data-open-dialog="expense-dialog"><span aria-hidden="true">+</span> Add expense</button></div>
+        <section class="panel full-transactions-panel" aria-label="Expense history"><div class="list-toolbar"><div><strong id="all-expense-count">0 expenses</strong><span> &nbsp;·&nbsp; Sorted by newest</span></div><label class="filter-select"><span>Category</span><select id="category-filter"><option value="all">All categories</option></select></label></div><div class="table-wrap"><table class="transaction-table"><thead><tr><th scope="col">DESCRIPTION</th><th scope="col">CATEGORY</th><th scope="col">DATE</th><th scope="col" class="amount-column">AMOUNT</th><th scope="col" class="action-column"><span class="visually-hidden">Actions</span></th></tr></thead><tbody id="all-transactions"></tbody></table></div><div class="empty-state hidden" id="expenses-empty">No expenses match these filters.</div></section>
+        <footer class="page-footer"><span>Your money, your pace.</span><span>Saved in this browser only.</span></footer>
+      </section>
+
+      <section class="view" id="view-savings" aria-labelledby="savings-title" hidden>
+        <div class="page-heading"><div><div class="eyebrow">A LITTLE ROOM TO GROW</div><h1 id="savings-title">Savings summary.</h1><p class="page-subtitle">Small choices are adding up to something good.</p></div><button class="button button-outline" type="button" data-open-dialog="allowance-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Edit allowance</button></div>
+        <div class="savings-layout"><section class="panel savings-main-panel"><div class="savings-panel-heading"><div><span class="eyebrow">YOUR MONTHLY PICTURE</span><h2>A plan that feels like yours.</h2></div><span class="savings-leaf" aria-hidden="true">✳</span></div><div class="savings-rows"><div class="savings-row"><span>Your allowance</span><strong id="savings-allowance">₱0.00</strong></div><div class="savings-row"><span>Total expenses</span><strong id="savings-expenses">₱0.00</strong></div><div class="savings-row savings-net-row"><span>Left this month</span><strong id="savings-net">₱0.00</strong></div></div><div class="savings-progress-heading"><span>Allowance remaining</span><strong id="savings-percent">0%</strong></div><div class="savings-track" role="progressbar" aria-label="Monthly allowance remaining" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="savings-progress"></span></div><div class="savings-progress-labels"><span>Spent <strong id="savings-spent-percent">0%</strong></span><span>Remaining <strong id="savings-left-percent">0%</strong></span></div><p class="savings-note" id="savings-note">Every small step counts. Keep showing up for your goals.</p></section>
+          <aside class="savings-side-panel"><div class="savings-illustration" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="plant-stem"></div><div class="plant-leaf leaf-one"></div><div class="plant-leaf leaf-two"></div><div class="plant-leaf leaf-three"></div><div class="plant-pot"></div></div><div class="side-copy"><span class="eyebrow">A NOTE TO YOUR FUTURE SELF</span><h2>You're doing better than you think.</h2><p>Progress isn't always a straight line. It's the choice to keep paying attention.</p><button class="button button-dark" type="button" data-open-dialog="expense-dialog">Log an expense <span aria-hidden="true">→</span></button></div></aside></div>
+        <footer class="page-footer"><span>One good choice at a time.</span><span>Saved in this browser only.</span></footer>
+      </section>
+    </main>
+  </div>
+
+  <dialog class="app-dialog" id="expense-dialog" aria-labelledby="expense-dialog-title"><form class="dialog-form" id="expense-form"><div class="dialog-heading"><div><span class="eyebrow">A NEW LITTLE NOTE</span><h2 id="expense-dialog-title">Add an expense</h2></div><button class="dialog-close" type="button" data-close-dialog aria-label="Close">×</button></div><p class="dialog-subtitle">Keep track of it now; future you will be glad.</p><label class="form-field"><span>What was it?</span><input name="description" type="text" maxlength="60" placeholder="e.g. Lunch with friends" required></label><div class="form-row"><label class="form-field"><span>Amount</span><span class="amount-input-wrap"><span>₱</span><input name="amount" type="number" min="0.01" max="10000000" step="0.01" placeholder="0.00" required></span></label><label class="form-field"><span>Category</span><select name="category" required><option value="">Choose one</option><option>Food &amp; drink</option><option>Transport</option><option>Groceries</option><option>Shopping</option><option>Bills</option><option>Health</option><option>Education</option><option>Other</option></select></label></div><label class="form-field"><span>Date</span><input name="date" id="expense-date" type="date" required></label><div class="dialog-actions"><button class="button button-outline" type="button" data-close-dialog>Cancel</button><button class="button button-primary" type="submit">Save expense <span aria-hidden="true">→</span></button></div></form></dialog>
+  <dialog class="app-dialog" id="allowance-dialog" aria-labelledby="allowance-dialog-title"><form class="dialog-form" id="allowance-form"><div class="dialog-heading"><div><span class="eyebrow">YOUR MONTHLY PLAN</span><h2 id="allowance-dialog-title">Set your allowance</h2></div><button class="dialog-close" type="button" data-close-dialog aria-label="Close">×</button></div><p class="dialog-subtitle">Make room for the essentials and the little joys.</p><label class="form-field"><span>Monthly allowance</span><span class="amount-input-wrap"><span>₱</span><input name="allowance" type="number" min="0" max="100000000" step="100" placeholder="15000" required></span></label><div class="dialog-actions"><button class="button button-outline" type="button" data-close-dialog>Cancel</button><button class="button button-primary" type="submit">Save allowance <span aria-hidden="true">→</span></button></div></form></dialog>
+  <div class="toast-region" id="toast-region" role="status" aria-live="polite"></div>
+</body>
+</html>
